@@ -4,15 +4,11 @@ import re
 import os
 from dotenv import load_dotenv
 
-# Załaduj zmienne środowiskowe z pliku .env
 load_dotenv(dotenv_path=os.path.join(os.path.dirname(__file__), '.env'))
 
-# Inicjalizacja klienta boto3
 s3 = boto3.client('s3')
 bucket_name = os.getenv('BUCKET_NAME')
 
-
-# Funkcja do listowania wszystkich plików w S3
 @click.command('list')
 @click.option('--prefix', default='', help='Prefix (folder) to list files from, e.g., x-wing/')
 def list_files(prefix):
@@ -27,8 +23,6 @@ def list_files(prefix):
     except Exception as e:
         click.echo(f"Error listing files: {e}")
 
-
-# Funkcja do uploadu pliku do S3
 @click.command('upload')
 @click.argument('local_file_path')
 @click.argument('destination_key')
@@ -42,8 +36,6 @@ def upload_file(local_file_path, destination_key, folder):
     except Exception as e:
         click.echo(f"Error uploading file: {e}")
 
-
-# Funkcja do listowania plików pasujących do regexa
 @click.command('filter')
 @click.argument('regex_pattern')
 @click.option('--prefix', default='', help='Prefix (folder) to filter files from, e.g., x-wing/')
@@ -64,8 +56,6 @@ def filter_files(regex_pattern, prefix):
     except Exception as e:
         click.echo(f"Error filtering files: {e}")
 
-
-# Funkcja do usuwania plików pasujących do regexa
 @click.command('delete')
 @click.argument('regex_pattern')
 @click.option('--prefix', default='', help='Prefix (folder) to delete files from, e.g., x-wing/')
@@ -88,8 +78,6 @@ def delete_files(regex_pattern, prefix):
     except Exception as e:
         click.echo(f"Error deleting files: {e}")
 
-
-# Rejestracja komend w Click
 @click.group()
 def cli():
     """AWS S3 CLI Tool"""
