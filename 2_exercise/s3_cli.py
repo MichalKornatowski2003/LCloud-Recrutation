@@ -4,6 +4,7 @@ import re
 import os
 from dotenv import load_dotenv
 
+
 load_dotenv(dotenv_path=os.path.join(os.path.dirname(__file__), '.env'))
 
 s3 = boto3.client('s3')
