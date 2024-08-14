@@ -83,7 +83,6 @@ def cli():
     """AWS S3 CLI Tool"""
     pass
 
-
 cli.add_command(list_files)
 cli.add_command(upload_file)
 cli.add_command(filter_files)
